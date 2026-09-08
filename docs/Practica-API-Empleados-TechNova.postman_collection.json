@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "Práctica API Empleados - TechNova",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api/empleados" }
+  ],
+  "item": [
+    {
+      "name": "GET 1 - Listar todos los empleados",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] }
+      }
+    },
+    {
+      "name": "POST 1 - Registrar empleado válido",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Ana María\",\n  \"apellidos\": \"López Pérez\",\n  \"cargo\": \"Analista de sistemas\",\n  \"salario\": 18500.00\n}"
+        },
+        "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] }
+      }
+    },
+    {
+      "name": "POST 2 - Validación fallida (400)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"\",\n  \"apellidos\": \"Pérez\",\n  \"cargo\": \"\",\n  \"salario\": 0\n}"
+        },
+        "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] }
+      }
+    },
+    {
+      "name": "POST 3 - Nombre duplicado (409)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Ana María\",\n  \"apellidos\": \"López Pérez\",\n  \"cargo\": \"Contador\",\n  \"salario\": 15000.00\n}"
+        },
+        "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] }
+      }
+    },
+    {
+      "name": "GET 2 - Buscar por ID existente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["1"]
+        }
+      }
+    },
+    {
+      "name": "GET 3 - Buscar por ID inexistente (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/999",
+          "host": ["{{baseUrl}}"],
+          "path": ["999"]
+        }
+      }
+    },
+    {
+      "name": "PUT 1 - Actualizar empleado existente",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Ana María\",\n  \"apellidos\": \"López Pérez\",\n  \"cargo\": \"Analista Senior\",\n  \"salario\": 21000.00\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["1"]
+        }
+      }
+    },
+    {
+      "name": "PUT 2 - Actualizar ID inexistente (404)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Carlos\",\n  \"apellidos\": \"Ramírez\",\n  \"cargo\": \"Contador\",\n  \"salario\": 15000.00\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/999",
+          "host": ["{{baseUrl}}"],
+          "path": ["999"]
+        }
+      }
+    },
+    {
+      "name": "DELETE 1 - Eliminar empleado existente",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["1"]
+        }
+      }
+    },
+    {
+      "name": "DELETE 2 - Eliminar ID inexistente (404)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["1"]
+        }
+      }
+    }
+  ]
+}
